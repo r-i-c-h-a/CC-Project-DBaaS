@@ -30,7 +30,7 @@ def add_user():
     if(no_user==0):
         if(re.match("^[a-fA-F0-9]{40}$",password)):
             data ={"method":"put","collection":"users","data":{"username":username,"password":password}}
-            requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+            requests.post('http://52.44.66.88/api/v1/db/write',json =data)
             return Response(json.dumps({}),status=201,mimetype='application/json')
         else:
             return Response(json.dumps({}), status=400,mimetype='application/json')
@@ -53,7 +53,7 @@ def delete_user(name):
         return Response(json.dumps({}), status=400, mimetype='application/json')
     else:
         data ={"method":"delete","collection":"users","data":{"username":name}}
-        requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+        requests.post('http://52.44.66.88/api/v1/db/write',json =data)
         return Response(json.dumps({}), status=200, mimetype='application/json')
 
 
@@ -62,7 +62,7 @@ def delete_user(name):
 def list_users():
     #print(result)
     data = {"method":"get_all","collection":"users","data":"null"}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     if(json.loads(response.content.decode("utf-8"))==[]):
         return Response(json.dumps({}), status=204, mimetype='application/json')
     else:
@@ -73,7 +73,7 @@ def list_users():
 @app.route('/api/v1/db/clear',methods=["POST"])
 def clear():
     data = {"method":"clear","collection":"users","data":"null"}
-    requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+    requests.post('http://52.44.66.88/api/v1/db/write',json =data)
     return '{}'
 
 
