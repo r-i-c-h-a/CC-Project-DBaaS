@@ -19,8 +19,8 @@ def add_ride():
     username = request.get_json()["created_by"]
     #no_user = mongo.db.users.find({"username":username}).count()
     #print(username)
-    header = {'Origin':'54.209.163.218'}
-    users = requests.get('http://rides-share-ALB-1336335870.us-east-1.elb.amazonaws.com/api/v1/users')
+    header = {'Origin':'34.196.181.165'}
+    users = requests.get('http://test-project-80298398.us-east-1.elb.amazonaws.com/api/v1/users')
     users_list = json.loads(users.content.decode("utf-8"))
     no_user=0
     for record in users_list:
@@ -48,7 +48,7 @@ def add_ride():
                 allrides = json.loads(allrides_res.content.decode("utf-8"))
                 rideId = list(allrides)[no_rides-1]["rideId"]+1
             data= {"method":"post","collection":"rides","data":{"rideId":rideId,"created_by":username,"users":[],"timestamp":timestamp,"source":source,"destination":destination}}
-            requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+            requests.post('http://52.44.66.88/api/v1/db/write',json =data)
             return Response(json.dumps({}), status=201, mimetype='application/json')
         else:
             return Response(json.dumps({}), status=400, mimetype='application/json')
@@ -65,7 +65,7 @@ def list_rides():
     #print(lines)
     if(int(source) in range(1,lines) and int(destination) in range(1,lines) and int(source)!=int(destination)):
         data = {"method":"get_all","collection":"rides","data":{"source":int(source),"destination":int(destination)}}
-        response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+        response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
         if(json.loads(response.content.decode("utf-8"))==[]):
             return Response(json.dumps({}), status=204, mimetype='application/json')
         else:
@@ -85,7 +85,7 @@ def ride_details(rideId):
         return Response(json.dumps({}), status=400, mimetype='application/json')
     else:
         data = {"method":"get_ride","collection":"rides","data":{"rideId":rideId}}
-        response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+        response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
         return(response.content)
 
 
@@ -101,8 +101,8 @@ def join_ride(rideId):
     data = request.get_json()
     username = request.get_json()["username"]
     #no_user = mongo.db.users.find({"username":username}).count()
-    header = {'Origin':'54.209.163.218'}
-    users = requests.get('http://rides-share-ALB-1336335870.us-east-1.elb.amazonaws.com/api/v1/users')
+    header = {'Origin':'34.196.181.165'}
+    users = requests.get('http://test-project-80298398.us-east-1.elb.amazonaws.com/api/v1/users')
     users_list = json.loads(users.content.decode("utf-8"))
     no_user=0
     for record in users_list:
@@ -127,7 +127,7 @@ def join_ride(rideId):
             return Response(json.dumps({}), status=400, mimetype='application/json')
         else:
             data = {"method":"join","collection":"rides","rideId":rideId,"data":{"users":username}}
-            requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+            requests.post('http://52.44.66.88/api/v1/db/write',json =data)
             return Response(json.dumps({}), status=200, mimetype='application/json')
 
 
@@ -141,7 +141,7 @@ def delete_ride(rideId):
         return Response(json.dumps({}), status=400, mimetype='application/json')
     else:
         data = {"method":"delete","collection":"rides","data":{"rideId":rideId}}
-        requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+        requests.post('http://52.44.66.88/api/v1/db/write',json =data)
         return Response(json.dumps({}), status=200, mimetype='application/json')
 
 
@@ -149,7 +149,7 @@ def delete_ride(rideId):
 @app.route('/api/v1/db/clear',methods=["POST"])
 def clear():
     data = {"method":"clear","collection":"rides","data":"null"}
-    requests.post('http://35.174.239.75/api/v1/db/write',json =data)
+    requests.post('http://52.44.66.88/api/v1/db/write',json =data)
     return '{}'
 
 
@@ -158,7 +158,7 @@ def clear():
 @app.route('/api/v1/rides/count',methods=["GET"])
 def getnorides():    
     data = {"method":"get_rides_count","collection":"rides","data":"null"}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     ctr = int(response.content)
     if(ctr==0):
         return Response('[ '+str(ctr)+' ]', status=204, mimetype='application/json')
@@ -170,7 +170,7 @@ def getnorides():
 @app.route('/api/v1/rides/userrides/<username>',methods=["GET"])
 def get_user_rides(username):    
     data = {"method":"get_user_rides","collection":"rides","data":{"created_by":username}}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     return Response(response.content, status=200, mimetype='application/json')
 
 
@@ -179,7 +179,7 @@ def get_user_rides(username):
 @app.route('/api/v1/rides/rideIdrides/<int:rideId>',methods=["GET"])
 def get_id_rides(rideId):    
     data = {"method":"get_id_rides","collection":"rides","data":{"rideId":rideId}}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     return Response(response.content, status=200, mimetype='application/json')
 
 
@@ -187,7 +187,7 @@ def get_id_rides(rideId):
 @app.route('/api/v1/rides/allrides',methods=["GET"])
 def get_all_rides():    
     data = {"method":"get_all_rides","collection":"rides","data":"null"}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     return Response(response.content, status=200, mimetype='application/json')
 
 
@@ -195,7 +195,7 @@ def get_all_rides():
 @app.route('/api/v1/rides/rideIdcount/<int:rideId>',methods=["GET"])
 def get_no_id_rides(rideId):    
     data = {"method":"get_id_rides_count","collection":"rides","data":{"rideId":rideId}}
-    response = requests.post('http://35.174.239.75/api/v1/db/read',json =data)
+    response = requests.post('http://52.44.66.88/api/v1/db/read',json =data)
     ctr = int(response.content)
     if(ctr==0):
         return Response('[ '+str(ctr)+' ]', status=204, mimetype='application/json')
