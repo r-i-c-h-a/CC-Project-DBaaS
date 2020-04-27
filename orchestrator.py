@@ -5,6 +5,7 @@ from flask import Response
 from bson.json_util import dumps
 import pika
 import os
+import docker
 
 app = Flask(__name__)
 
@@ -63,42 +64,81 @@ def write():
 @app.route('/api/v1/crash/master',methods=["POST"])
 def kill_master():
     workers = []
-    output = [i.strip('\n') for i in os.popen('sudo docker ps --format "{{.Names}}"').readlines()]
-    for i in output:
-        if ismaster(i) or isslave(i) or isworker(i):
-            workers.append(i)
-    pids = [int(os.popen('sudo docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
-    to_kill = workers[pids.index(min(pids))]
-    flag = os.system("sudo docker kill "+to_kill)
-    if flag:
-        return "{}"
+    client = docker.from_env()
+    conts = client.containers.list(all)
+    cont_pid = dict()
+    output = []
+    pids = []
+    for i in conts:
+         output.append([i,i.attrs['Config']['Image']])
+         pids.append(int(i.attrs['State']['Pid']))
+         # print(i.attrs['State']['Pid'],i.attrs['Config']['Image'])
+    #output = [i.strip('\n') for i in os.popen('docker ps --format "{{.Names}}"').readlines()]
+    final_pid = []
+    for i in range(len(output)):
+        if (ismaster(output[i][1]) or isslave(output[i][1]) or isworker(output[i][1])) and pids[i]!=0:
+            workers.append(output[i])
+            final_pid.append(pids[i])
+    #pids = [int(os.popen('docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
+    #pass
+    print(final_pid,workers)
+    to_kill = workers[final_pid.index(min(final_pid))][0]
+    #flag = os.system("sudo docker kill "+to_kill)
+    to_kill.kill()
+    #if flag:
+    return "{}"
     #pass
 
 
 @app.route('/api/v1/crash/slave',methods=["POST"])
 def kill_highest_slave():
     workers = []
-    output = [i.strip('\n') for i in os.popen('sudo docker ps --format "{{.Names}}"').readlines()]
-    for i in output:
-        if ismaster(i) or isslave(i) or isworker(i):
-            workers.append(i)
-    pids = [int(os.popen('sudo docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
-    to_kill = workers[pids.index(max(pids))]
-    flag = os.system("sudo docker kill "+to_kill)
-    if flag:
-        return "{}"
+    client = docker.from_env()
+    conts = client.containers.list(all)
+    cont_pid = dict()
+    output = []
+    pids = []
+    for i in conts:
+         output.append([i,i.attrs['Config']['Image']])
+         pids.append(int(i.attrs['State']['Pid']))
+         # print(i.attrs['State']['Pid'],i.attrs['Config']['Image'])
+    #output = [i.strip('\n') for i in os.popen('docker ps --format "{{.Names}}"').readlines()]
+    final_pid = []
+    for i in range(len(output)):
+        if (ismaster(output[i][1]) or isslave(output[i][1]) or isworker(output[i][1])) and pids[i]!=0:
+            workers.append(output[i])
+            final_pid.append(pids[i])
+    #pids = [int(os.popen('docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
+    #pass
+    print(final_pid,workers)
+    to_kill = workers[final_pid.index(max(final_pid))][0]
+    #flag = os.system("sudo docker kill "+to_kill)
+    to_kill.kill()
+    #if flag:
+    return "{}"
     #pass
 
 
 @app.route('/api/v1/worker/list',methods=["GET"])
 def get_sorted_workers_pid():
     workers = []
-    output = [i.strip('\n') for i in os.popen('sudo docker ps --format "{{.Names}}"').readlines()]
-    for i in output:
-        if ismaster(i) or isslave(i) or isworker(i):
-            workers.append(i)
-    pids = [int(os.popen('sudo docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
-    response = sorted(pids)
+    client = docker.from_env()
+    conts = client.containers.list(all)
+    cont_pid = dict()
+    output = []
+    pids = []
+    for i in conts:
+         output.append(i.attrs['Config']['Image'])
+         pids.append(int(i.attrs['State']['Pid']))
+         # print(i.attrs['State']['Pid'],i.attrs['Config']['Image'])
+    #output = [i.strip('\n') for i in os.popen('docker ps --format "{{.Names}}"').readlines()]
+    final_pid = []
+    for i in range(len(output)):
+        if ismaster(output[i]) or isslave(output[i]) or isworker(output[i]):
+            workers.append(output[i])
+            final_pid.append(pids[i])
+    #pids = [int(os.popen('docker inspect --format="{{.State.Pid}}" '+i).read().strip('\n')) for i in workers]
+    response = sorted(final_pid)
     return(json.dumps(response))
     #pass
 
