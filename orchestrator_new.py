@@ -126,40 +126,40 @@ def kill_master():
     for i in conts:
         if ismaster(i.attrs['Config']['Image']):
             to_kill_master = i
-        print(i.attrs['Config']['Image'])
-        if ismastermongo(i.attrs['Config']['Image']):
-            to_kill_mongo = i
+        #print("##################",i.attrs['Names'])
+        #if ismastermongo(i.attrs['Config']['Image']):
+        #   to_kill_mongo = i
     to_kill_master.kill()
-    to_kill_mongo.kill()
+    client.containers.get('master-mongo').kill()
     return "{}"
 
 
 @app.route('/api/v1/crash/slave',methods=["POST"])
 def kill_highest_slave():
-    client = docker.from_env()
+        client = docker.from_env()
     conts = client.containers.list(all)
     high = 0
     slavemongo = []
     to_kill_slave = ""
     for i in conts:
-        if high < int(i.attrs['State']['Pid']) and isslave(i.attrs['Config']['Image']) and int(i.attrs['State']['Pid']) != 0:
+        if high < int(i.attrs['State']['Pid']) and isslave(i.attrs['Config']$
             to_kill_slave = i
             name_to_kill = i.attrs['Config']['Image']
-        if isslavemongo(i.attrs['Config']['Image']) and int(i.attrs['State']['Pid']) != 0:
+        if isslavemongo(i.attrs['Config']['Image']) and int(i.attrs['State']$
             slavemongo.append([i,i.attrs['Config']['Image']])
     slave_no = name_to_kill.partition("slave")[2]
-    slave_no = slave_no.split('_')[0]
-    print(slave_no)
+    slave_no = slave_no.partition('_')[0]
+    print("###############################",slave_no)
     for i in slavemongo:
         if(i[1].endswith(slave_no)):
             to_kill_mongo = i[0]
     if to_kill_slave != "":
         to_kill_slave.kill()
-        to_kill_mongo.kill()
+        client.containers.get('slave-mongo'+slave_no).kill()
+        #to_kill_mongo.kill()
         return "{}"
     else:
         return "['Nothing to kill']"
-    #pass
 
 
 @app.route('/api/v1/worker/list',methods=["GET"])
