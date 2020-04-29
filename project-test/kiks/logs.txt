@@ -1,0 +1,339 @@
+Step 1/8 : FROM python:3.7-slim-stretch
+ ---> fd37a8e1ea65
+Step 2/8 : ENV PYTHONUNBUFFERED 1
+ ---> Using cache
+ ---> 56727656f7d5
+Step 3/8 : ENV PYTHONDONTWRITEBYTECODE 1
+ ---> Using cache
+ ---> f6025f660d35
+Step 4/8 : RUN mkdir -p /kiks
+ ---> Using cache
+ ---> 5768d74eeb57
+Step 5/8 : COPY ./requirements.txt /kiks/requirements.txt
+ ---> Using cache
+ ---> 1864bc98cfe6
+Step 6/8 : RUN pip install -r /kiks/requirements.txt
+ ---> Using cache
+ ---> bf32e998f06f
+Step 7/8 : COPY . /kiks
+ ---> c5f4850da12b
+Step 8/8 : WORKDIR /kiks
+ ---> Running in 0d479894b1ef
+Removing intermediate container 0d479894b1ef
+ ---> d5737d37ff90
+Successfully built d5737d37ff90
+Successfully tagged kiks_sync:latest
+Step 1/8 : FROM python:3.7-slim-stretch
+ ---> fd37a8e1ea65
+Step 2/8 : ENV PYTHONUNBUFFERED 1
+ ---> Using cache
+ ---> 56727656f7d5
+Step 3/8 : ENV PYTHONDONTWRITEBYTECODE 1
+ ---> Using cache
+ ---> f6025f660d35
+Step 4/8 : RUN mkdir -p /kiks
+ ---> Using cache
+ ---> 5768d74eeb57
+Step 5/8 : COPY ./requirements.txt /kiks/requirements.txt
+ ---> Using cache
+ ---> 1864bc98cfe6
+Step 6/8 : RUN pip install -r /kiks/requirements.txt
+ ---> Using cache
+ ---> bf32e998f06f
+Step 7/8 : COPY . /kiks
+ ---> ee02647c992b
+Step 8/8 : WORKDIR /kiks
+ ---> Running in 64a1b659ea49
+Removing intermediate container 64a1b659ea49
+ ---> 79ffc4d1ba58
+Successfully built 79ffc4d1ba58
+Successfully tagged kiks_orchestrator:latest
+Attaching to kiks_rmq_1, sync-mongo, kiks_zoo_1, kiks_sync_1, kiks_orchestrator_1
+[33msync-mongo      |[0m 2020-04-26T14:36:44.553+0000 I  CONTROL  [main] Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 W  ASIO     [main] No TransportLayer configured during NetworkInterface startup
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=474e86802370
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] db version v4.2.6
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] git version: 20364840b8f1af16917e4c23c1b5f5efd8b352f8
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.1  11 Sep 2018
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] allocator: tcmalloc
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] modules: none
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] build environment:
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten]     distmod: ubuntu1804
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten]     distarch: x86_64
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten]     target_arch: x86_64
+[33msync-mongo      |[0m 2020-04-26T14:36:44.574+0000 I  CONTROL  [initandlisten] options: { net: { bindIp: "*" } }
+[33msync-mongo      |[0m 2020-04-26T14:36:44.575+0000 I  STORAGE  [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+[33msync-mongo      |[0m 2020-04-26T14:36:44.575+0000 I  STORAGE  [initandlisten] 
+[33msync-mongo      |[0m 2020-04-26T14:36:44.575+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+[33msync-mongo      |[0m 2020-04-26T14:36:44.575+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+[33msync-mongo      |[0m 2020-04-26T14:36:44.575+0000 I  STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=487M,cache_overflow=(file_max=0M),session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress],
+[32mzoo_1           |[0m ZooKeeper JMX enabled by default
+[32mzoo_1           |[0m Using config: /conf/zoo.cfg
+[33msync-mongo      |[0m 2020-04-26T14:36:47.755+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911807:755389][1:0x7f3cc2a90b00], txn-recover: Recovering log 4 through 5
+[33msync-mongo      |[0m 2020-04-26T14:36:47.890+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911807:890440][1:0x7f3cc2a90b00], txn-recover: Recovering log 5 through 5
+[33msync-mongo      |[0m 2020-04-26T14:36:48.113+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911808:113269][1:0x7f3cc2a90b00], txn-recover: Main recovery loop: starting at 4/5888 to 5/256
+[33msync-mongo      |[0m 2020-04-26T14:36:48.390+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911808:390980][1:0x7f3cc2a90b00], txn-recover: Recovering log 4 through 5
+[33msync-mongo      |[0m 2020-04-26T14:36:48.556+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911808:556549][1:0x7f3cc2a90b00], txn-recover: Recovering log 5 through 5
+[33msync-mongo      |[0m 2020-04-26T14:36:48.688+0000 I  STORAGE  [initandlisten] WiredTiger message [1587911808:688752][1:0x7f3cc2a90b00], txn-recover: Set global recovery timestamp: (0, 0)
+[33msync-mongo      |[0m 2020-04-26T14:36:48.764+0000 I  RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+[33msync-mongo      |[0m 2020-04-26T14:36:48.783+0000 I  STORAGE  [initandlisten] Timestamp monitor starting
+[33msync-mongo      |[0m 2020-04-26T14:36:48.786+0000 I  CONTROL  [initandlisten] 
+[33msync-mongo      |[0m 2020-04-26T14:36:48.786+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+[33msync-mongo      |[0m 2020-04-26T14:36:48.786+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+[33msync-mongo      |[0m 2020-04-26T14:36:48.786+0000 I  CONTROL  [initandlisten] 
+[33msync-mongo      |[0m 2020-04-26T14:36:48.788+0000 I  SHARDING [initandlisten] Marking collection local.system.replset as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.793+0000 I  STORAGE  [initandlisten] Flow Control is enabled on this deployment.
+[33msync-mongo      |[0m 2020-04-26T14:36:48.794+0000 I  SHARDING [initandlisten] Marking collection admin.system.roles as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.794+0000 I  SHARDING [initandlisten] Marking collection admin.system.version as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.799+0000 I  SHARDING [initandlisten] Marking collection local.startup_log as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.802+0000 I  FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+[33msync-mongo      |[0m 2020-04-26T14:36:48.806+0000 I  SHARDING [LogicalSessionCacheRefresh] Marking collection config.system.sessions as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.807+0000 I  SHARDING [LogicalSessionCacheReap] Marking collection config.transactions as collection version: <unsharded>
+[33msync-mongo      |[0m 2020-04-26T14:36:48.809+0000 I  NETWORK  [listener] Listening on /tmp/mongodb-27017.sock
+[33msync-mongo      |[0m 2020-04-26T14:36:48.809+0000 I  NETWORK  [listener] Listening on 0.0.0.0
+[33msync-mongo      |[0m 2020-04-26T14:36:48.809+0000 I  NETWORK  [listener] waiting for connections on port 27017
+[32mzoo_1           |[0m 2020-04-26 14:36:48,795 [myid:] - INFO  [main:QuorumPeerConfig@173] - Reading configuration from: /conf/zoo.cfg
+[32mzoo_1           |[0m 2020-04-26 14:36:48,830 [myid:] - INFO  [main:QuorumPeerConfig@450] - clientPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,833 [myid:] - INFO  [main:QuorumPeerConfig@463] - secureClientPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,834 [myid:] - INFO  [main:QuorumPeerConfig@479] - observerMasterPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,837 [myid:] - INFO  [main:QuorumPeerConfig@496] - metricsProvider.className is org.apache.zookeeper.metrics.impl.DefaultMetricsProvider
+[32mzoo_1           |[0m 2020-04-26 14:36:48,857 [myid:] - ERROR [main:QuorumPeerConfig@720] - Invalid configuration, only one server specified (ignoring)
+[32mzoo_1           |[0m 2020-04-26 14:36:48,872 [myid:1] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+[32mzoo_1           |[0m 2020-04-26 14:36:48,873 [myid:1] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+[32mzoo_1           |[0m 2020-04-26 14:36:48,873 [myid:1] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+[32mzoo_1           |[0m 2020-04-26 14:36:48,874 [myid:1] - WARN  [main:QuorumPeerMain@138] - Either no config or no quorum defined in config, running in standalone mode
+[32mzoo_1           |[0m 2020-04-26 14:36:48,877 [myid:1] - INFO  [main:ManagedUtil@45] - Log4j found with jmx enabled.
+[32mzoo_1           |[0m 2020-04-26 14:36:48,915 [myid:1] - INFO  [main:QuorumPeerConfig@173] - Reading configuration from: /conf/zoo.cfg
+[32mzoo_1           |[0m 2020-04-26 14:36:48,916 [myid:1] - INFO  [main:QuorumPeerConfig@450] - clientPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,917 [myid:1] - INFO  [main:QuorumPeerConfig@463] - secureClientPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,917 [myid:1] - INFO  [main:QuorumPeerConfig@479] - observerMasterPort is not set
+[32mzoo_1           |[0m 2020-04-26 14:36:48,923 [myid:1] - INFO  [main:QuorumPeerConfig@496] - metricsProvider.className is org.apache.zookeeper.metrics.impl.DefaultMetricsProvider
+[32mzoo_1           |[0m 2020-04-26 14:36:48,924 [myid:1] - ERROR [main:QuorumPeerConfig@720] - Invalid configuration, only one server specified (ignoring)
+[32mzoo_1           |[0m 2020-04-26 14:36:48,926 [myid:1] - INFO  [main:ZooKeeperServerMain@122] - Starting server
+[32mzoo_1           |[0m 2020-04-26 14:36:48,964 [myid:1] - INFO  [main:ServerMetrics@62] - ServerMetrics initialized with provider org.apache.zookeeper.metrics.impl.DefaultMetricsProvider@7a675056
+[32mzoo_1           |[0m 2020-04-26 14:36:48,978 [myid:1] - INFO  [main:FileTxnSnapLog@124] - zookeeper.snapshot.trust.empty : false
+[33msync-mongo      |[0m 2020-04-26T14:36:49.001+0000 I  SHARDING [ftdc] Marking collection local.oplog.rs as collection version: <unsharded>
+[32mzoo_1           |[0m 2020-04-26 14:36:49,012 [myid:1] - INFO  [main:ZookeeperBanner@42] - 
+[32mzoo_1           |[0m 2020-04-26 14:36:49,017 [myid:1] - INFO  [main:ZookeeperBanner@42] -   ______                  _                                          
+[32mzoo_1           |[0m 2020-04-26 14:36:49,018 [myid:1] - INFO  [main:ZookeeperBanner@42] -  |___  /                 | |                                         
+[32mzoo_1           |[0m 2020-04-26 14:36:49,018 [myid:1] - INFO  [main:ZookeeperBanner@42] -     / /    ___     ___   | | __   ___    ___   _ __     ___   _ __   
+[32mzoo_1           |[0m 2020-04-26 14:36:49,018 [myid:1] - INFO  [main:ZookeeperBanner@42] -    / /    / _ \   / _ \  | |/ /  / _ \  / _ \ | '_ \   / _ \ | '__|
+[32mzoo_1           |[0m 2020-04-26 14:36:49,019 [myid:1] - INFO  [main:ZookeeperBanner@42] -   / /__  | (_) | | (_) | |   <  |  __/ |  __/ | |_) | |  __/ | |    
+[32mzoo_1           |[0m 2020-04-26 14:36:49,019 [myid:1] - INFO  [main:ZookeeperBanner@42] -  /_____|  \___/   \___/  |_|\_\  \___|  \___| | .__/   \___| |_|
+[32mzoo_1           |[0m 2020-04-26 14:36:49,021 [myid:1] - INFO  [main:ZookeeperBanner@42] -                                               | |                     
+[32mzoo_1           |[0m 2020-04-26 14:36:49,022 [myid:1] - INFO  [main:ZookeeperBanner@42] -                                               |_|                     
+[32mzoo_1           |[0m 2020-04-26 14:36:49,022 [myid:1] - INFO  [main:ZookeeperBanner@42] - 
+[32mzoo_1           |[0m 2020-04-26 14:36:49,026 [myid:1] - INFO  [main:Environment@98] - Server environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+[32mzoo_1           |[0m 2020-04-26 14:36:49,027 [myid:1] - INFO  [main:Environment@98] - Server environment:host.name=zoo
+[32mzoo_1           |[0m 2020-04-26 14:36:49,028 [myid:1] - INFO  [main:Environment@98] - Server environment:java.version=11.0.7
+[32mzoo_1           |[0m 2020-04-26 14:36:49,028 [myid:1] - INFO  [main:Environment@98] - Server environment:java.vendor=Oracle Corporation
+[32mzoo_1           |[0m 2020-04-26 14:36:49,028 [myid:1] - INFO  [main:Environment@98] - Server environment:java.home=/usr/local/openjdk-11
+[32mzoo_1           |[0m 2020-04-26 14:36:49,029 [myid:1] - INFO  [main:Environment@98] - Server environment:java.class.path=/apache-zookeeper-3.6.0-bin/bin/../zookeeper-server/target/classes:/apache-zookeeper-3.6.0-bin/bin/../build/classes:/apache-zookeeper-3.6.0-bin/bin/../zookeeper-server/target/lib/*.jar:/apache-zookeeper-3.6.0-bin/bin/../build/lib/*.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/zookeeper-prometheus-metrics-3.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/zookeeper-jute-3.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/zookeeper-3.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/snappy-java-1.1.7.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/slf4j-log4j12-1.7.25.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/slf4j-api-1.7.25.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/simpleclient_servlet-0.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/simpleclient_hotspot-0.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/simpleclient_common-0.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/simpleclient-0.6.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-transport-native-unix-common-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-transport-native-epoll-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-transport-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-resolver-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-handler-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-common-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-codec-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/netty-buffer-4.1.45.Final.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/metrics-core-3.2.5.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/log4j-1.2.17.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/json-simple-1.1.1.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jline-2.11.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-util-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-servlet-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-server-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-security-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-io-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jetty-http-9.4.24.v20191120.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/javax.servlet-api-3.1.0.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jackson-databind-2.9.10.3.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jackson-core-2.9.10.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/jackson-annotations-2.9.10.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/commons-lang-2.6.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/commons-cli-1.2.jar:/apache-zookeeper-3.6.0-bin/bin/../lib/audience-annotations-0.5.0.jar:/apache-zookeeper-3.6.0-bin/bin/../zookeeper-*.jar:/apache-zookeeper-3.6.0-bin/bin/../zookeeper-server/src/main/resources/lib/*.jar:/conf:
+[32mzoo_1           |[0m 2020-04-26 14:36:49,030 [myid:1] - INFO  [main:Environment@98] - Server environment:java.library.path=/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+[32mzoo_1           |[0m 2020-04-26 14:36:49,034 [myid:1] - INFO  [main:Environment@98] - Server environment:java.io.tmpdir=/tmp
+[32mzoo_1           |[0m 2020-04-26 14:36:49,035 [myid:1] - INFO  [main:Environment@98] - Server environment:java.compiler=<NA>
+[32mzoo_1           |[0m 2020-04-26 14:36:49,036 [myid:1] - INFO  [main:Environment@98] - Server environment:os.name=Linux
+[32mzoo_1           |[0m 2020-04-26 14:36:49,036 [myid:1] - INFO  [main:Environment@98] - Server environment:os.arch=amd64
+[32mzoo_1           |[0m 2020-04-26 14:36:49,036 [myid:1] - INFO  [main:Environment@98] - Server environment:os.version=4.4.0-1105-aws
+[32mzoo_1           |[0m 2020-04-26 14:36:49,037 [myid:1] - INFO  [main:Environment@98] - Server environment:user.name=zookeeper
+[32mzoo_1           |[0m 2020-04-26 14:36:49,037 [myid:1] - INFO  [main:Environment@98] - Server environment:user.home=/home/zookeeper
+[32mzoo_1           |[0m 2020-04-26 14:36:49,037 [myid:1] - INFO  [main:Environment@98] - Server environment:user.dir=/apache-zookeeper-3.6.0-bin
+[32mzoo_1           |[0m 2020-04-26 14:36:49,038 [myid:1] - INFO  [main:Environment@98] - Server environment:os.memory.free=23MB
+[32mzoo_1           |[0m 2020-04-26 14:36:49,038 [myid:1] - INFO  [main:Environment@98] - Server environment:os.memory.max=966MB
+[32mzoo_1           |[0m 2020-04-26 14:36:49,038 [myid:1] - INFO  [main:Environment@98] - Server environment:os.memory.total=30MB
+[32mzoo_1           |[0m 2020-04-26 14:36:49,039 [myid:1] - INFO  [main:ZooKeeperServer@128] - zookeeper.enableEagerACLCheck = false
+[32mzoo_1           |[0m 2020-04-26 14:36:49,039 [myid:1] - INFO  [main:ZooKeeperServer@136] - zookeeper.digest.enabled = true
+[32mzoo_1           |[0m 2020-04-26 14:36:49,040 [myid:1] - INFO  [main:ZooKeeperServer@140] - zookeeper.closeSessionTxn.enabled = true
+[32mzoo_1           |[0m 2020-04-26 14:36:49,042 [myid:1] - INFO  [main:ZooKeeperServer@1433] - zookeeper.flushDelay=0
+[32mzoo_1           |[0m 2020-04-26 14:36:49,042 [myid:1] - INFO  [main:ZooKeeperServer@1442] - zookeeper.maxWriteQueuePollTime=0
+[32mzoo_1           |[0m 2020-04-26 14:36:49,044 [myid:1] - INFO  [main:ZooKeeperServer@1451] - zookeeper.maxBatchSize=1000
+[32mzoo_1           |[0m 2020-04-26 14:36:49,045 [myid:1] - INFO  [main:ZooKeeperServer@241] - zookeeper.intBufferStartingSizeBytes = 1024
+[32mzoo_1           |[0m 2020-04-26 14:36:49,046 [myid:1] - INFO  [main:BlueThrottle@141] - Weighed connection throttling is disabled
+[32mzoo_1           |[0m 2020-04-26 14:36:49,049 [myid:1] - INFO  [main:ZooKeeperServer@1246] - minSessionTimeout set to 4000
+[32mzoo_1           |[0m 2020-04-26 14:36:49,051 [myid:1] - INFO  [main:ZooKeeperServer@1255] - maxSessionTimeout set to 40000
+[32mzoo_1           |[0m 2020-04-26 14:36:49,054 [myid:1] - INFO  [main:ResponseCache@45] - Response cache size is initialized with value 400.
+[32mzoo_1           |[0m 2020-04-26 14:36:49,055 [myid:1] - INFO  [main:ResponseCache@45] - Response cache size is initialized with value 400.
+[32mzoo_1           |[0m 2020-04-26 14:36:49,058 [myid:1] - INFO  [main:RequestPathMetricsCollector@111] - zookeeper.pathStats.slotCapacity = 60
+[32mzoo_1           |[0m 2020-04-26 14:36:49,059 [myid:1] - INFO  [main:RequestPathMetricsCollector@112] - zookeeper.pathStats.slotDuration = 15
+[32mzoo_1           |[0m 2020-04-26 14:36:49,059 [myid:1] - INFO  [main:RequestPathMetricsCollector@113] - zookeeper.pathStats.maxDepth = 6
+[32mzoo_1           |[0m 2020-04-26 14:36:49,060 [myid:1] - INFO  [main:RequestPathMetricsCollector@114] - zookeeper.pathStats.initialDelay = 5
+[32mzoo_1           |[0m 2020-04-26 14:36:49,066 [myid:1] - INFO  [main:RequestPathMetricsCollector@115] - zookeeper.pathStats.delay = 5
+[32mzoo_1           |[0m 2020-04-26 14:36:49,066 [myid:1] - INFO  [main:RequestPathMetricsCollector@116] - zookeeper.pathStats.enabled = false
+[32mzoo_1           |[0m 2020-04-26 14:36:49,076 [myid:1] - INFO  [main:ZooKeeperServer@1470] - The max bytes for all large requests are set to 104857600
+[32mzoo_1           |[0m 2020-04-26 14:36:49,079 [myid:1] - INFO  [main:ZooKeeperServer@1484] - The large request threshold is set to -1
+[32mzoo_1           |[0m 2020-04-26 14:36:49,079 [myid:1] - INFO  [main:ZooKeeperServer@329] - Created server with tickTime 2000 minSessionTimeout 4000 maxSessionTimeout 40000 clientPortListenBacklog -1 datadir /datalog/version-2 snapdir /data/version-2
+[32mzoo_1           |[0m 2020-04-26 14:36:49,224 [myid:1] - INFO  [main:Log@169] - Logging initialized @4646ms to org.eclipse.jetty.util.log.Slf4jLog
+[32mzoo_1           |[0m 2020-04-26 14:36:49,632 [myid:1] - WARN  [main:ContextHandler@1520] - o.e.j.s.ServletContextHandler@338fc1d8{/,null,UNAVAILABLE} contextPath ends with /*
+[32mzoo_1           |[0m 2020-04-26 14:36:49,647 [myid:1] - WARN  [main:ContextHandler@1531] - Empty contextPath
+[32mzoo_1           |[0m 2020-04-26 14:36:49,713 [myid:1] - INFO  [main:Server@359] - jetty-9.4.24.v20191120; built: 2019-11-20T21:37:49.771Z; git: 363d5f2df3a8a28de40604320230664b9c793c16; jvm 11.0.7+10
+[32mzoo_1           |[0m 2020-04-26 14:36:49,835 [myid:1] - INFO  [main:DefaultSessionIdManager@333] - DefaultSessionIdManager workerName=node0
+[32mzoo_1           |[0m 2020-04-26 14:36:49,839 [myid:1] - INFO  [main:DefaultSessionIdManager@338] - No SessionScavenger set, using defaults
+[32mzoo_1           |[0m 2020-04-26 14:36:49,845 [myid:1] - INFO  [main:HouseKeeper@140] - node0 Scavenging every 660000ms
+[32mzoo_1           |[0m 2020-04-26 14:36:49,878 [myid:1] - INFO  [main:ContextHandler@825] - Started o.e.j.s.ServletContextHandler@338fc1d8{/,null,AVAILABLE}
+[32mzoo_1           |[0m 2020-04-26 14:36:49,936 [myid:1] - INFO  [main:AbstractConnector@330] - Started ServerConnector@74e28667{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[32mzoo_1           |[0m 2020-04-26 14:36:49,939 [myid:1] - INFO  [main:Server@399] - Started @5394ms
+[32mzoo_1           |[0m 2020-04-26 14:36:49,946 [myid:1] - INFO  [main:JettyAdminServer@178] - Started AdminServer on address 0.0.0.0, port 8080 and command URL /commands
+[32mzoo_1           |[0m 2020-04-26 14:36:49,966 [myid:1] - INFO  [main:ServerCnxnFactory@169] - Using org.apache.zookeeper.server.NIOServerCnxnFactory as server connection factory
+[32mzoo_1           |[0m 2020-04-26 14:36:49,971 [myid:1] - WARN  [main:ServerCnxnFactory@309] - maxCnxns is not configured, using default value 0.
+[32mzoo_1           |[0m 2020-04-26 14:36:49,972 [myid:1] - INFO  [main:NIOServerCnxnFactory@666] - Configuring NIO connection handler with 10s sessionless connection timeout, 1 selector thread(s), 2 worker threads, and 64 kB direct buffers.
+[32mzoo_1           |[0m 2020-04-26 14:36:49,978 [myid:1] - INFO  [main:NIOServerCnxnFactory@674] - binding to port /0.0.0.0:2181
+[32mzoo_1           |[0m 2020-04-26 14:36:50,033 [myid:1] - INFO  [main:WatchManagerFactory@42] - Using org.apache.zookeeper.server.watch.WatchManager as watch manager
+[32mzoo_1           |[0m 2020-04-26 14:36:50,034 [myid:1] - INFO  [main:WatchManagerFactory@42] - Using org.apache.zookeeper.server.watch.WatchManager as watch manager
+[32mzoo_1           |[0m 2020-04-26 14:36:50,044 [myid:1] - INFO  [main:ZKDatabase@132] - zookeeper.snapshotSizeFactor = 0.33
+[32mzoo_1           |[0m 2020-04-26 14:36:50,045 [myid:1] - INFO  [main:ZKDatabase@152] - zookeeper.commitLogCount=500
+[32mzoo_1           |[0m 2020-04-26 14:36:50,052 [myid:1] - INFO  [main:SnapStream@61] - zookeeper.snapshot.compression.method = CHECKED
+[32mzoo_1           |[0m 2020-04-26 14:36:50,057 [myid:1] - INFO  [main:FileSnap@85] - Reading snapshot /data/version-2/snapshot.0
+[32mzoo_1           |[0m 2020-04-26 14:36:50,070 [myid:1] - INFO  [main:DataTree@1737] - The digest value is empty in snapshot
+[32mzoo_1           |[0m 2020-04-26 14:36:50,072 [myid:1] - INFO  [main:ZKDatabase@289] - Snapshot loaded in 27 ms, highest zxid is 0x0, digest is 1371985504
+[32mzoo_1           |[0m 2020-04-26 14:36:50,077 [myid:1] - INFO  [main:FileTxnSnapLog@470] - Snapshotting: 0x0 to /data/version-2/snapshot.0
+[32mzoo_1           |[0m 2020-04-26 14:36:50,082 [myid:1] - INFO  [main:ZooKeeperServer@519] - Snapshot taken in 5 ms
+[32mzoo_1           |[0m 2020-04-26 14:36:50,100 [myid:1] - INFO  [main:RequestThrottler@74] - zookeeper.request_throttler.shutdownTimeout = 10000
+[32mzoo_1           |[0m 2020-04-26 14:36:50,156 [myid:1] - INFO  [main:ContainerManager@83] - Using checkIntervalMs=60000 maxPerMinute=10000 maxNeverUsedIntervalMs=0
+[32mzoo_1           |[0m 2020-04-26 14:36:50,158 [myid:1] - INFO  [main:ZKAuditProvider@42] - ZooKeeper audit is disabled.
+[36mrmq_1           |[0m 2020-04-26 14:36:56.398 [info] <0.9.0> Feature flags: list of feature flags found:
+[36mrmq_1           |[0m 2020-04-26 14:36:56.398 [info] <0.9.0> Feature flags:   [x] implicit_default_bindings
+[36mrmq_1           |[0m 2020-04-26 14:36:56.398 [info] <0.9.0> Feature flags:   [x] quorum_queue
+[36mrmq_1           |[0m 2020-04-26 14:36:56.399 [info] <0.9.0> Feature flags:   [x] virtual_host_metadata
+[36mrmq_1           |[0m 2020-04-26 14:36:56.399 [info] <0.9.0> Feature flags: feature flag states written to disk: yes
+[36mrmq_1           |[0m 2020-04-26 14:36:56.489 [info] <0.291.0> ra: meta data store initialised. 0 record(s) recovered
+[36mrmq_1           |[0m 2020-04-26 14:36:56.491 [info] <0.301.0> WAL: recovering ["/var/lib/rabbitmq/mnesia/rabbit@229dafeccdd9/quorum/rabbit@229dafeccdd9/00000004.wal"]
+[36mrmq_1           |[0m 2020-04-26 14:36:56.855 [warning] <0.301.0> wal: encountered error during recovery: badarg
+[36mrmq_1           |[0m Continuing.
+[36mrmq_1           |[0m 2020-04-26 14:36:56.883 [info] <0.309.0> 
+[36mrmq_1           |[0m  Starting RabbitMQ 3.8.3 on Erlang 22.3.2
+[36mrmq_1           |[0m  Copyright (c) 2007-2020 Pivotal Software, Inc.
+[36mrmq_1           |[0m  Licensed under the MPL 1.1. Website: https://rabbitmq.com
+[36mrmq_1           |[0m 
+[36mrmq_1           |[0m   ##  ##      RabbitMQ 3.8.3
+[36mrmq_1           |[0m   ##  ##
+[36mrmq_1           |[0m   ##########  Copyright (c) 2007-2020 Pivotal Software, Inc.
+[36mrmq_1           |[0m   ######  ##
+[36mrmq_1           |[0m   ##########  Licensed under the MPL 1.1. Website: https://rabbitmq.com
+[36mrmq_1           |[0m 
+[36mrmq_1           |[0m   Doc guides: https://rabbitmq.com/documentation.html
+[36mrmq_1           |[0m   Support:    https://rabbitmq.com/contact.html
+[36mrmq_1           |[0m   Tutorials:  https://rabbitmq.com/getstarted.html
+[36mrmq_1           |[0m   Monitoring: https://rabbitmq.com/monitoring.html
+[36mrmq_1           |[0m 
+[36mrmq_1           |[0m   Logs: <stdout>
+[36mrmq_1           |[0m 
+[36mrmq_1           |[0m   Config file(s): /etc/rabbitmq/rabbitmq.conf
+[36mrmq_1           |[0m 
+[36mrmq_1           |[0m   Starting broker...2020-04-26 14:36:56.887 [info] <0.309.0> 
+[36mrmq_1           |[0m  node           : rabbit@229dafeccdd9
+[36mrmq_1           |[0m  home dir       : /var/lib/rabbitmq
+[36mrmq_1           |[0m  config file(s) : /etc/rabbitmq/rabbitmq.conf
+[36mrmq_1           |[0m  cookie hash    : A7ZCqP0Vdm0mMfubfTTuug==
+[36mrmq_1           |[0m  log(s)         : <stdout>
+[36mrmq_1           |[0m  database dir   : /var/lib/rabbitmq/mnesia/rabbit@229dafeccdd9
+[36mrmq_1           |[0m 2020-04-26 14:36:56.897 [info] <0.309.0> Running boot step pre_boot defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.897 [info] <0.309.0> Running boot step rabbit_core_metrics defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.899 [info] <0.309.0> Running boot step rabbit_alarm defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.909 [info] <0.329.0> Memory high watermark set to 799 MiB (838293913 bytes) of 1998 MiB (2095734784 bytes) total
+[36mrmq_1           |[0m 2020-04-26 14:36:56.911 [info] <0.338.0> Enabling free disk space monitoring
+[36mrmq_1           |[0m 2020-04-26 14:36:56.911 [info] <0.338.0> Disk free limit set to 50MB
+[36mrmq_1           |[0m 2020-04-26 14:36:56.913 [info] <0.309.0> Running boot step code_server_cache defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.914 [info] <0.309.0> Running boot step file_handle_cache defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.914 [info] <0.341.0> Limiting to approx 1048479 file handles (943629 sockets)
+[36mrmq_1           |[0m 2020-04-26 14:36:56.914 [info] <0.342.0> FHC read buffering:  OFF
+[36mrmq_1           |[0m 2020-04-26 14:36:56.914 [info] <0.342.0> FHC write buffering: ON
+[36mrmq_1           |[0m 2020-04-26 14:36:56.915 [info] <0.309.0> Running boot step worker_pool defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.915 [info] <0.312.0> Will use 1 processes for default worker pool
+[36mrmq_1           |[0m 2020-04-26 14:36:56.915 [info] <0.312.0> Starting worker pool 'worker_pool' with 1 processes in it
+[36mrmq_1           |[0m 2020-04-26 14:36:56.915 [info] <0.309.0> Running boot step database defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.920 [info] <0.309.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+[36mrmq_1           |[0m 2020-04-26 14:36:56.920 [info] <0.309.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+[36mrmq_1           |[0m 2020-04-26 14:36:56.938 [info] <0.309.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+[36mrmq_1           |[0m 2020-04-26 14:36:56.938 [info] <0.309.0> Peer discovery backend rabbit_peer_discovery_classic_config does not support registration, skipping registration.
+[36mrmq_1           |[0m 2020-04-26 14:36:56.938 [info] <0.309.0> Running boot step database_sync defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.939 [info] <0.309.0> Running boot step feature_flags defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.939 [info] <0.309.0> Running boot step codec_correctness_check defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.939 [info] <0.309.0> Running boot step external_infrastructure defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.940 [info] <0.309.0> Running boot step rabbit_registry defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.940 [info] <0.309.0> Running boot step rabbit_auth_mechanism_cr_demo defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.941 [info] <0.309.0> Running boot step rabbit_queue_location_random defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.941 [info] <0.309.0> Running boot step rabbit_event defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.942 [info] <0.309.0> Running boot step rabbit_auth_mechanism_amqplain defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.942 [info] <0.309.0> Running boot step rabbit_auth_mechanism_plain defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.942 [info] <0.309.0> Running boot step rabbit_exchange_type_direct defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.943 [info] <0.309.0> Running boot step rabbit_exchange_type_fanout defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.943 [info] <0.309.0> Running boot step rabbit_exchange_type_headers defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.943 [info] <0.309.0> Running boot step rabbit_exchange_type_topic defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.944 [info] <0.309.0> Running boot step rabbit_mirror_queue_mode_all defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.944 [info] <0.309.0> Running boot step rabbit_mirror_queue_mode_exactly defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.944 [info] <0.309.0> Running boot step rabbit_mirror_queue_mode_nodes defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.945 [info] <0.309.0> Running boot step rabbit_priority_queue defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.945 [info] <0.309.0> Priority queues enabled, real BQ is rabbit_variable_queue
+[36mrmq_1           |[0m 2020-04-26 14:36:56.945 [info] <0.309.0> Running boot step rabbit_queue_location_client_local defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.946 [info] <0.309.0> Running boot step rabbit_queue_location_min_masters defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.946 [info] <0.309.0> Running boot step kernel_ready defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.946 [info] <0.309.0> Running boot step rabbit_sysmon_minder defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.947 [info] <0.309.0> Running boot step rabbit_epmd_monitor defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.950 [info] <0.361.0> epmd monitor knows us, inter-node communication (distribution) port: 25672
+[36mrmq_1           |[0m 2020-04-26 14:36:56.950 [info] <0.309.0> Running boot step guid_generator defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.953 [info] <0.309.0> Running boot step rabbit_node_monitor defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.954 [info] <0.367.0> Starting rabbit_node_monitor
+[36mrmq_1           |[0m 2020-04-26 14:36:56.954 [info] <0.309.0> Running boot step delegate_sup defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.954 [info] <0.309.0> Running boot step rabbit_memory_monitor defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.955 [info] <0.309.0> Running boot step core_initialized defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.955 [info] <0.309.0> Running boot step upgrade_queues defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.967 [info] <0.309.0> Running boot step rabbit_connection_tracking defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.967 [info] <0.309.0> Running boot step rabbit_connection_tracking_handler defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.968 [info] <0.309.0> Running boot step rabbit_exchange_parameters defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.968 [info] <0.309.0> Running boot step rabbit_mirror_queue_misc defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.969 [info] <0.309.0> Running boot step rabbit_policies defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.970 [info] <0.309.0> Running boot step rabbit_policy defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.970 [info] <0.309.0> Running boot step rabbit_queue_location_validator defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.970 [info] <0.309.0> Running boot step rabbit_quorum_memory_manager defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.970 [info] <0.309.0> Running boot step rabbit_vhost_limit defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.971 [info] <0.309.0> Running boot step recovery defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.972 [info] <0.396.0> Making sure data directory '/var/lib/rabbitmq/mnesia/rabbit@229dafeccdd9/msg_stores/vhosts/628WB79CIFDYO9LJI6DKMI09L' for vhost '/' exists
+[36mrmq_1           |[0m 2020-04-26 14:36:56.978 [info] <0.396.0> Starting message stores for vhost '/'
+[36mrmq_1           |[0m 2020-04-26 14:36:56.978 [info] <0.400.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_transient": using rabbit_msg_store_ets_index to provide index
+[36mrmq_1           |[0m 2020-04-26 14:36:56.981 [info] <0.396.0> Started message store of type transient for vhost '/'
+[36mrmq_1           |[0m 2020-04-26 14:36:56.982 [info] <0.403.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": using rabbit_msg_store_ets_index to provide index
+[36mrmq_1           |[0m 2020-04-26 14:36:56.983 [warning] <0.403.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": rebuilding indices from scratch
+[36mrmq_1           |[0m 2020-04-26 14:36:56.985 [info] <0.396.0> Started message store of type persistent for vhost '/'
+[36mrmq_1           |[0m 2020-04-26 14:36:56.987 [info] <0.309.0> Running boot step load_core_definitions defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.987 [info] <0.309.0> Running boot step empty_db_check defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.988 [info] <0.309.0> Running boot step rabbit_looking_glass defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.988 [info] <0.309.0> Running boot step rabbit_core_metrics_gc defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.988 [info] <0.309.0> Running boot step background_gc defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.989 [info] <0.309.0> Running boot step connection_tracking defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.989 [info] <0.309.0> Setting up a table for connection tracking on this node: tracked_connection_on_node_rabbit@229dafeccdd9
+[36mrmq_1           |[0m 2020-04-26 14:36:56.990 [info] <0.309.0> Setting up a table for per-vhost connection counting on this node: tracked_connection_per_vhost_on_node_rabbit@229dafeccdd9
+[36mrmq_1           |[0m 2020-04-26 14:36:56.990 [info] <0.309.0> Running boot step routing_ready defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.990 [info] <0.309.0> Running boot step pre_flight defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.991 [info] <0.309.0> Running boot step notify_cluster defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.991 [info] <0.309.0> Running boot step networking defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.994 [info] <0.440.0> started TCP listener on [::]:5672
+[36mrmq_1           |[0m 2020-04-26 14:36:56.994 [info] <0.309.0> Running boot step cluster_name defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.994 [info] <0.309.0> Running boot step direct_client defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.995 [info] <0.309.0> Running boot step os_signal_handler defined by app rabbit
+[36mrmq_1           |[0m 2020-04-26 14:36:56.995 [info] <0.442.0> Swapping OS signal event handler (erl_signal_server) for our own
+[36mrmq_1           |[0m 2020-04-26 14:36:57.313 [info] <0.9.0> Server startup complete; 0 plugins started.
+[36mrmq_1           |[0m  completed with 0 plugins.
+[33msync-mongo      |[0m 2020-04-26T14:37:31.835+0000 I  NETWORK  [listener] connection accepted from 192.168.112.6:47550 #1 (1 connection now open)
+[33msync-mongo      |[0m 2020-04-26T14:37:31.836+0000 I  NETWORK  [conn1] received client metadata from 192.168.112.6:47550 conn1: { driver: { name: "PyMongo", version: "3.10.1" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.4.0-1105-aws" }, platform: "CPython 3.7.7.final.0" }
+[36mrmq_1           |[0m 2020-04-26 14:37:31.838 [info] <0.481.0> accepting AMQP connection <0.481.0> (192.168.112.6:38556 -> 192.168.112.2:5672)
+[36mrmq_1           |[0m 2020-04-26 14:37:31.841 [info] <0.481.0> connection <0.481.0> (192.168.112.6:38556 -> 192.168.112.2:5672): user 'guest' authenticated and granted access to vhost '/'
+[35msync_1          |[0m  [*] Waiting for logs
+[36mrmq_1           |[0m 2020-04-26 14:37:38.157 [info] <0.505.0> accepting AMQP connection <0.505.0> (192.168.112.5:51594 -> 192.168.112.2:5672)
+[36mrmq_1           |[0m 2020-04-26 14:37:38.160 [info] <0.505.0> connection <0.505.0> (192.168.112.5:51594 -> 192.168.112.2:5672): user 'guest' authenticated and granted access to vhost '/'
+[36mrmq_1           |[0m 2020-04-26 14:37:38.166 [info] <0.520.0> accepting AMQP connection <0.520.0> (192.168.112.5:51598 -> 192.168.112.2:5672)
+[36mrmq_1           |[0m 2020-04-26 14:37:38.169 [info] <0.520.0> connection <0.520.0> (192.168.112.5:51598 -> 192.168.112.2:5672): user 'guest' authenticated and granted access to vhost '/'
+[36mrmq_1           |[0m 2020-04-26 14:37:38.174 [info] <0.535.0> accepting AMQP connection <0.535.0> (192.168.112.5:51602 -> 192.168.112.2:5672)
+[36mrmq_1           |[0m 2020-04-26 14:37:38.176 [info] <0.535.0> connection <0.535.0> (192.168.112.5:51602 -> 192.168.112.2:5672): user 'guest' authenticated and granted access to vhost '/'
+[31morchestrator_1  |[0m killing existing containers
+[36mrmq_1           |[0m 2020-04-26 14:37:38.214 [warning] <0.481.0> closing AMQP connection <0.481.0> (192.168.112.6:38556 -> 192.168.112.2:5672, vhost: '/', user: 'guest'):
+[36mrmq_1           |[0m client unexpectedly closed TCP connection
+[33msync-mongo      |[0m 2020-04-26T14:37:38.215+0000 I  NETWORK  [conn1] end connection 192.168.112.6:47550 (0 connections now open)
+[35mkiks_sync_1 exited with code 137
+[0m[36mrmq_1           |[0m 2020-04-26 14:37:38.376 [warning] <0.535.0> closing AMQP connection <0.535.0> (192.168.112.5:51602 -> 192.168.112.2:5672, vhost: '/', user: 'guest'):
+[36mrmq_1           |[0m client unexpectedly closed TCP connection
+[36mrmq_1           |[0m 2020-04-26 14:37:38.377 [warning] <0.520.0> closing AMQP connection <0.520.0> (192.168.112.5:51598 -> 192.168.112.2:5672, vhost: '/', user: 'guest'):
+[36mrmq_1           |[0m client unexpectedly closed TCP connection
+[36mrmq_1           |[0m 2020-04-26 14:37:38.377 [warning] <0.505.0> closing AMQP connection <0.505.0> (192.168.112.5:51594 -> 192.168.112.2:5672, vhost: '/', user: 'guest'):
+[36mrmq_1           |[0m client unexpectedly closed TCP connection
+[31mkiks_orchestrator_1 exited with code 137
+[0mGracefully stopping... (press Ctrl+C again to force)
