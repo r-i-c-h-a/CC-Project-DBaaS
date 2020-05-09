@@ -13,14 +13,15 @@ import logging
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://rides-mongo:27017/rides"
 mongo = PyMongo(app)
-requests_count = 0
 
+class counter(object):
+    requests_count = 0
 
+C = counter()
 #API to create new ride
 @app.route('/api/v1/rides',methods=['POST'])
 def add_ride():
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     if(not request.json):
         return Response(json.dumps({}), status=400, mimetype='application/json')
     data = request.get_json()
@@ -61,8 +62,7 @@ def add_ride():
 #API to get rides given source and destination as query params
 @app.route('/api/v1/rides',methods=['GET'])
 def list_rides():
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     source = request.args.get("source")
     destination = request.args.get("destination")
     with open("AreaNameEnum.csv") as f:
@@ -82,8 +82,7 @@ def list_rides():
 #API to get ride details given rideID in url
 @app.route('/api/v1/rides/<int:rideId>',methods=['GET'])
 def ride_details(rideId):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     no_rides = mongo.db.rides.find({"rideId":rideId}).count()
     if(no_rides==0):
         return Response(json.dumps({}), status=400, mimetype='application/json')
@@ -97,8 +96,7 @@ def ride_details(rideId):
 #API to add user to existing ride (join the ride)
 @app.route('/api/v1/rides/<int:rideId>',methods=['POST'])
 def join_ride(rideId):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     no_rides = mongo.db.rides.find({"rideId":rideId}).count()
     data = request.get_json()
     username = request.get_json()["username"]
@@ -133,8 +131,7 @@ def join_ride(rideId):
 #API to delete existing ride
 @app.route('/api/v1/rides/<int:rideId>',methods=['DELETE'])
 def delete_ride(rideId):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     no_rides = mongo.db.rides.find({"rideId":rideId}).count()
     if(no_rides==0):
         return Response(json.dumps({}), status=400, mimetype='application/json')
@@ -207,20 +204,18 @@ def clear():
 #API to count http requests to rides app
 @app.route('/api/v1/_count',methods=["GET"])
 def getrequestcount():
-    return '[ '+str(requests_count)+' ]'
+    return '[ '+str(C.requests_count)+' ]'
 
 #reset requests count for rides app
 @app.route('/api/v1/_count',methods=["DELETE"])
 def resetrequestcount():
-    global requests_count
-    requests_count=0
+    C.requests_count=0
     return '{}'
 
 #API to get total number of rides
 @app.route('/api/v1/rides/count',methods=["GET"])
 def getnorides():
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     result = mongo.db.rides.find().count()
     if(result==0):
         return Response('[ '+str(result)+' ]', status=204, mimetype='application/json')
@@ -235,14 +230,12 @@ def getnorides():
 
 @app.errorhandler(400)
 def not_found_bad(e):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     return Response('',status=400)
 
 @app.errorhandler(405)
 def not_method(e):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     return Response('',status=405)
 
 if __name__ == '__main__':

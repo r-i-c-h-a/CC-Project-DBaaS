@@ -13,13 +13,15 @@ import logging
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://users-mongo:27017/users"
 mongo = PyMongo(app)
-requests_count=0
 
+class counter(object):
+    requests_count = 0
+
+C = counter()
 #API to add user
 @app.route('/api/v1/users',methods=['PUT'])
 def add_user():
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     username = request.get_json()["username"]
     password = request.get_json()["password"]
     #print(username)
@@ -38,8 +40,7 @@ def add_user():
 #API to delete user
 @app.route('/api/v1/users/<string:name>',methods=['DELETE'])
 def delete_user(name):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     no_user = mongo.db.users.find({"username":name}).count()
     if(no_user==0):
         return Response(json.dumps({}), status=400, mimetype='application/json')
@@ -51,8 +52,7 @@ def delete_user(name):
 #API to list users
 @app.route('/api/v1/users',methods=['GET'])
 def list_users():
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     result = dumps(mongo.db.users.find({},{"_id":0}))
     #print(result)
     if(json.loads(result)==[]):
@@ -89,13 +89,12 @@ def clear():
 #API to count http requests to users app
 @app.route('/api/v1/_count',methods=["GET"])
 def getrequestcount():
-    return '[ '+str(requests_count)+' ]'
+    return '[ '+str(C.requests_count)+' ]'
 
 #reset requests count for users app
 @app.route('/api/v1/_count',methods=["DELETE"])
 def resetrequestcount():
-    global requests_count
-    requests_count=0
+    C.requests_count=0
     return '{}'
 
 #@app.errorhandler(404)
@@ -106,14 +105,12 @@ def resetrequestcount():
 
 @app.errorhandler(400)
 def not_found_bad(e):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     return Response('',status=400)
 
 @app.errorhandler(405)
 def not_method(e):
-    global requests_count
-    requests_count+=1
+    C.requests_count+=1
     return Response('',status=405)
 
 if __name__ == '__main__':
