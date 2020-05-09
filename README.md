@@ -7,15 +7,16 @@
 ```
 cd rides-test/rides
 ```
-
-```
-cd rides-test/rides
-```
-
 <br>
-3. sudo docker system prune --volumes
+3. 
+```
+sudo docker system prune --volumes
+```
 <br>
-4. sudo docker-compose up --build<br>
+4. 
+```
+sudo docker-compose up --build<br>
+```
 
 <h1> Users Instance</h1><br>
 1. Start the AWS Users Instance<br>
