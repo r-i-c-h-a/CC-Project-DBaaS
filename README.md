@@ -8,6 +8,12 @@
 cd rides-test/rides
 ```
 
+```
+if (isAwesome){
+  return true
+}
+```
+
 <br>
 3. sudo docker system prune --volumes
 <br>
