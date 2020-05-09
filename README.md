@@ -9,9 +9,7 @@ cd rides-test/rides
 ```
 
 ```
-if (isAwesome){
-  return true
-}
+cd rides-test/rides
 ```
 
 <br>
