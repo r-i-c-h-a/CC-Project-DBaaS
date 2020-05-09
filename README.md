@@ -16,6 +16,6 @@
 <h1> DBaaS Instance</h1><br>
 1. Start the AWS DBaaS Instance<br>
 2. cd project-test/project<br>
-3. sudo docker rm -f $(sudo docker ps -aq)
+3. sudo docker rm -f $(sudo docker ps -aq)<br>
 4. sudo docker system prune --volumes<br>
 5. sudo docker-compose up --build<br>
