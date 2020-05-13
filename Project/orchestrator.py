@@ -20,6 +20,7 @@ zk.start()
 
 class Child(object):
     prev_children=list()
+    signal = 0
     
 c=Child()
 @zk.ChildrenWatch("/zookeeper")
@@ -27,12 +28,13 @@ def watch_children(children):
     print("Children are now: %s" % children)
     print("@@@@@@@@@@@@@@@@@@@",c.prev_children)
     print("*******************",children)
-    if(set(c.prev_children).difference(set(children))):
+    if(set(c.prev_children).difference(set(children)) and c.signal==1):
       node=list(set(c.prev_children).difference(set(children)))[0]
       slave_no= node.partition("node_")[2]
       print("@@@@@@@@@@@@@@",slave_no)
       container_name = "slave"+str(slave_no)
       mongo_name = "slave-mongo"+str(slave_no)
+      c.signal = 0
       client.containers.run(image='mongo:latest',name=mongo_name,restart_policy = {'Name':'on-failure'},detach=True,network="project_default")
       client.containers.run(image='workers:latest', name=container_name,command="python3 slave.py",environment=["NODE_TYPE=SLAVE","MONGO="+mongo_name],restart_policy={'Name':'on-failure'},network='project_default',links={mongo_name:'slave'},detach=True)
     for i in children:
@@ -80,7 +82,7 @@ class Scale(object):
     number = 1
 
     def check(self):
-        print("################hello in trigger#################")
+        print("################hello in trigger#################",self.count)
         a=list()
         b=list()
         c=list()
@@ -88,7 +90,7 @@ class Scale(object):
         b=client.containers.list(filters={'status':'running'})
         c=[val.name for val in a if val in b]
         print("NAMES OF CONTAINERS:",c)
-        containers_needed = math.ceil(self.count/5)   #PLEASE CHANGE BACK TO 20
+        containers_needed = math.ceil(self.count/20)   #PLEASE CHANGE BACK TO 20
         if(containers_needed == 0):
               containers_needed = 1
         containers_running = len(c)-3 #TODO: Write command to count current containers
@@ -212,6 +214,7 @@ def kill_highest_slave():
         #zk.delete("/zookeeper/node_1")
         #children = zk.get_children("/zookeeper", watch=demo_func)
         #print("There are %s children with names %s" % (len(children), children))
+        c.signal = 1
         client.containers.prune()
         return "{}"
     else:
