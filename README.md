@@ -1,5 +1,8 @@
 # CC-Project-DBaaS
 
+<h2> Architecture</h2>
+<img src="Report/DBaaS_Architecture.jpg" height=500></img>
+
 <h2> Instructions to run the code</h2>
 <h3> Rides Instance </h3>
 1. Start the AWS Rides Instance<br>
